@@ -1,5 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db')
+
+dotenv.config({ path: './config/config.env' })
+
+connectDB();
 
 const app = express();
 
@@ -9,7 +14,7 @@ const server = app.listen(PORT, () => {
     console.log(`Server is listening on PORT ${PORT}`)
 })
 
-Process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', (err) => {
     console.log(`Error: ${err.message}`)
     server.close(() => process.exit(1))
 })
